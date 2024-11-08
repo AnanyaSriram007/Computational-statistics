@@ -1,0 +1,32 @@
+import numpy as np
+from scipy.optimize import minimize
+
+# Generate the input data
+np.random.seed(0)  # for reproducibility
+x = np.linspace(-10, 30, 100)
+e = np.random.normal(0, 5, 100)
+y = 10 + 4 * x + e
+
+# Objective function for optimization
+def objective(params):
+    a, b, c = params
+    y_pred = a + b * x + c * x**2
+    return np.sum((y - y_pred) ** 2)
+
+# Initial guesses for parameters
+initial_guess = [1, 1, 1]
+
+# Perform the optimization
+result = minimize(objective, initial_guess, method='L-BFGS-B')
+
+# Print the exact output format
+print("message:", result.message)
+print("success:", result.success)
+print("status:", result.status)
+print("fun:", result.fun)
+print("x:", result.x)
+print("nit:", result.nit)
+print("jac:", result.jac)
+print("nfev:", result.nfev)
+print("njev:", result.njev)
+print("hess_inv:", result.hess_inv)
