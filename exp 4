@@ -1,0 +1,16 @@
+python
+import plotly.express as px
+
+# Load the Iris dataset
+iris = px.data.iris()
+
+# 1. Print the Statistical Description for the attribute "Petal Width"
+print(iris['petal_width'].describe())
+
+# 2. Print the Box Plot of the attribute "Petal Width"
+fig = px.box(iris, y='petal_width')
+fig.show()
+
+# 3. Print the dependency curve of the attribute "Petal Width"
+fig = px.scatter(iris, x='petal_length', y='petal_width', trendline='ols')
+fig.show()
