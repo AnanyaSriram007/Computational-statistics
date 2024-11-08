@@ -1,0 +1,36 @@
+import plotly.express as px
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load the Iris dataset from plotly.express
+df = px.data.iris()
+
+# Print the total number of records
+print("Total Number of Records:")
+print(df.shape)  # should output (150, 6)
+
+# Plot the normal distribution of numerical attributes
+fig, axes = plt.subplots(2, 2, figsize=(10, 8))
+fig.suptitle('Normal distribution of the Numerical Attributes')
+
+sns.histplot(df['sepal_length'], kde=True, ax=axes[0, 0])
+axes[0, 0].set_title('Normal Distribution of sepal_length')
+
+sns.histplot(df['sepal_width'], kde=True, ax=axes[0, 1])
+axes[0, 1].set_title('Normal Distribution of sepal_width')
+
+sns.histplot(df['petal_length'], kde=True, ax=axes[1, 0])
+axes[1, 0].set_title('Normal Distribution of petal_length')
+
+sns.histplot(df['petal_width'], kde=True, ax=axes[1, 1])
+axes[1, 1].set_title('Normal Distribution of petal_width')
+
+plt.tight_layout(rect=[0, 0, 1, 0.96])
+plt.show()
+
+# Calculate and print the mean and standard deviation of numerical attributes
+print("\nMean and Standard Deviation of the Numerical Attributes:")
+summary = df[['sepal_length', 'sepal_width', 'petal_length', 'petal_width']].agg(['mean', 'std']).T
+summary.columns = ['Mean', 'Standard Deviation']
+print(summary)
